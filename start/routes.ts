@@ -5,3 +5,4 @@ Route.get('/', async () => {
 })
 
 Route.resource('/categorias', 'CategoriasController').apiOnly()
+Route.resource('/perfis', 'PerfisController').apiOnly()

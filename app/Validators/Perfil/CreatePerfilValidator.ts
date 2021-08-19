@@ -7,7 +7,7 @@ export default class CreateCategoriaValidator {
   public schema = schema.create({
     nome: schema.string({}, [
       rules.required(),
-      rules.unique({ table: 'categorias', column: 'nome', caseInsensitive: true }),
+      rules.unique({ table: 'perfis', column: 'nome', caseInsensitive: true }),
     ]),
   })
 

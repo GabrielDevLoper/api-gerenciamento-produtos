@@ -59,5 +59,11 @@ export default class CategoriasController {
     }
   }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({ params }: HttpContextContract) {
+    const { id } = params
+
+    const categoria = await Categoria.findOrFail(id)
+
+    await categoria.delete()
+  }
 }

@@ -1,13 +1,17 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreateCategoriaValidator {
+export default class UpdateCategoriaValidator {
   constructor(protected ctx: HttpContextContract) {}
+
+  public refs = schema.refs({
+    id: this.ctx.params.id,
+  })
 
   public schema = schema.create({
     nome: schema.string({}, [
       rules.required(),
-      rules.unique({ table: 'categorias', column: 'nome', caseInsensitive: true }),
+      rules.unique({ table: 'perfis', column: 'nome', whereNot: { id: this.refs.id } }),
     ]),
   })
 
