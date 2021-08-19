@@ -5,8 +5,14 @@ import CreateCategoriaValidator from 'App/Validators/Categoria/CreateCategoriaVa
 import UpdateCategoriaValidator from 'App/Validators/Categoria/UpdateCategoriaValidator'
 
 export default class CategoriasController {
-  public async index({}: HttpContextContract) {
-    const categorias = await Categoria.all()
+  public async index({ request }: HttpContextContract) {
+    const { nome } = request.qs()
+
+    const categorias = await Categoria.query().where((query) => {
+      if (nome) {
+        query.where('nome', 'like', `%${nome}%`)
+      }
+    })
 
     return categorias
   }
